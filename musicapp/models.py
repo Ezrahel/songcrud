@@ -12,10 +12,12 @@ class Artist(models.Model):
 
 
 class Song(models.Model):
-    title = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    artists = models.ForeignKey(Artist, on_delete = models.CASCADE)
+    title = models.CharField(max_length=100)
     date_released = models.DateField()
     likes = models.CharField(max_length=100)
-    artist_id = models.CharField(primary_key=True, max_length = 500, unique = True)
+    # artist_id = models.ForeignKey(Artist,on_delete = models.CASCADE,primary_key=True)
+    artist_id = models.CharField(primary_key=True, max_length = 100, unique = True)
 
     def get_title(self):
         return self.title
@@ -25,8 +27,9 @@ class Song(models.Model):
 
 
 class Lyric(models.Model):
-    content = models.ForeignKey(Song, on_delete=models.CASCADE)
-    song_id = models.CharField(primary_key = True, max_length = 5, unique = True)
+    songs = models.ForeignKey(Song, on_delete = models.CASCADE)
+    content = models.TextField()
+    song_id = models.CharField(primary_key=True, max_length = 100, unique = True)
 
     def get_lyric(self):
         return self.content

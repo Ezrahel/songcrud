@@ -37,6 +37,7 @@ class SongSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Song
         fields = [
+            'artists',
             'title',
             'date_released',
             'likes',
@@ -55,6 +56,7 @@ class SongSerializer(serializers.HyperlinkedModelSerializer):
         """
         Update and return an existing `Snippet` instance, given the validated data.
         """
+        instance.artists = validated_data.get('artists', instance.artists)
         instance.title = validated_data.get('title', instance.title)
         instance.date_released = validated_data.get('date_released', instance.date_released)
         instance.likes = validated_data.get('likes', instance.likes)
@@ -69,6 +71,7 @@ class LyricSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Lyric
         fields = [
+            'songs',
             'content',
             'song_id',
             'url',
@@ -85,6 +88,7 @@ class LyricSerializer(serializers.HyperlinkedModelSerializer):
         """
         Update and return an existing `Snippet` instance, given the validated data.
         """
+        instance.songs = validated_data.get('songs', instance.songs)
         instance.content = validated_data.get('content', instance.content)
         instance.song_id = validated_data.get('song_id', instance.song_id)
         instance.save()
