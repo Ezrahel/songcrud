@@ -37,7 +37,6 @@ class SongSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Song
         fields = [
-            'artists',
             'title',
             'date_released',
             'likes',
@@ -71,7 +70,6 @@ class LyricSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Lyric
         fields = [
-            'songs',
             'content',
             'song_id',
             'url',
